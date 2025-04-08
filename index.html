@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File & Email Manager</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>File & Email Manager</h1>
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="files">File Manager</button>
+        <button class="tab-btn" data-tab="emails">Email Service</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- File Manager Tab -->
+      <section id="files" class="tab-content active">
+        <div class="card">
+          <h2>Upload File</h2>
+          <form id="uploadForm" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="fileUpload">Select File:</label>
+              <input type="file" id="fileUpload" name="file" required>
+            </div>
+            <div class="form-group">
+              <label for="uploadFolder">Folder (optional):</label>
+              <input type="text" id="uploadFolder" name="folder" placeholder="e.g., documents/reports">
+            </div>
+            <button type="submit">Upload File</button>
+            <div id="uploadStatus" class="status"></div>
+          </form>
+        </div>
+        
+        <div class="card">
+          <h2>File Manager</h2>
+          
+          <div class="filters">
+            <div class="filter-group">
+              <label for="folder">Folder:</label>
+              <input type="text" id="folder" placeholder="Enter folder path">
+            </div>
+            <div class="filter-group">
+              <label for="fileType">File Type:</label>
+              <input type="text" id="fileType" placeholder="e.g., .pdf, .jpg">
+            </div>
+            <button id="filterBtn">Filter Files</button>
+            <button id="showAllBtn">Show All Files</button>
+          </div>
+          
+          <div class="files-container">
+            <div class="loading" id="filesLoading">Loading files...</div>
+            <div id="filesList" class="files-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Email Service Tab -->
+      <section id="emails" class="tab-content">
+        <div class="card">
+          <h2>Send Email</h2>
+          <form id="emailForm">
+            <div class="form-group">
+              <label for="emailTo">To:</label>
+              <input type="email" id="emailTo" required placeholder="recipient@example.com">
+            </div>
+            <div class="form-group">
+              <label for="emailSubject">Subject:</label>
+              <input type="text" id="emailSubject" required placeholder="Email subject">
+            </div>
+            <div class="form-group">
+              <label for="emailBody">Message:</label>
+              <textarea id="emailBody" required placeholder="Enter your message here..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>Attachments:</label>
+              <button id="attachFilesBtn" class="secondary-btn">Select Files</button>
+              <div id="selectedFilesContainer" class="selected-files"></div>
+            </div>
+            <button type="submit">Send Email</button>
+            <div id="emailStatus" class="status"></div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2>Email History</h2>
+          <div class="search-container">
+            <input type="text" id="emailSearch" placeholder="Search emails...">
+            <button id="searchEmailsBtn">Search</button>
+          </div>
+          <div class="loading" id="emailsLoading">Loading emails...</div>
+          <div id="emailsList" class="emails-list"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- File Selection Modal -->
+  <div id="fileSelectionModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Select Files to Attach</h2>
+        <button id="closeModalBtn" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="modalFilesList" class="modal-files-list"></div>
+      </div>
+      <div class="modal-footer">
+        <button id="confirmAttachBtn">Confirm Selection</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
