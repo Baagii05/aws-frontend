@@ -1,6 +1,6 @@
 
-const FILE_SERVICE_URL = 'http://52.55.96.19';
-const MAIL_SERVICE_URL = 'http://18.183.255.158';
+const FILE_SERVICE_URL = 'https://52.55.96.19';
+const MAIL_SERVICE_URL = 'https://18.183.255.158';
 
 
 const tabButtons = document.querySelectorAll('.tab-btn');
