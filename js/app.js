@@ -66,7 +66,14 @@ async function loadFiles(folder = '', fileType = '') {
       url += `?${params.toString()}`;
     }
     
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      mode: 'no-cors',
+      
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
