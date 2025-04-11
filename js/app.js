@@ -68,7 +68,6 @@ async function loadFiles(folder = '', fileType = '') {
     
     const response = await fetch(url, {
       mode: 'no-cors',
-      
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
@@ -208,6 +207,11 @@ async function deleteFile(key) {
   try {
     const response = await fetch(`${FILE_SERVICE_URL}/delete/${key}`, {
       method: 'DELETE',
+      mode: 'no-cors',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
     
     if (!response.ok) {
@@ -226,7 +230,10 @@ async function uploadFile(formData) {
   try {
     const response = await fetch(`${FILE_SERVICE_URL}/upload`, {
       method: 'POST',
-      body: formData,
+      mode: 'no-cors',
+      credentials: 'include',
+      body: formData
+      // Note: Don't set Content-Type header when sending FormData
     });
     
     if (!response.ok) {
@@ -256,7 +263,13 @@ async function loadAllFiles() {
     filesLoading.style.display = 'block';
     filesList.innerHTML = '';
     
-    const response = await fetch(`${FILE_SERVICE_URL}/retrieve-files`);
+    const response = await fetch(`${FILE_SERVICE_URL}/retrieve-files`, {
+      mode: 'no-cors',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -282,6 +295,8 @@ async function sendEmail(emailData) {
   try {
     const response = await fetch(`${MAIL_SERVICE_URL}/send-email`, {
       method: 'POST',
+      mode: 'no-cors',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -310,7 +325,14 @@ async function loadEmails(search = '') {
       url += `?search=${encodeURIComponent(search)}`;
     }
     
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      mode: 'no-cors',
+      
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -379,7 +401,13 @@ function renderEmails(emails) {
 
 function showFileSelectionModal() {
   
-  fetch(`${FILE_SERVICE_URL}/retrieve-files`)
+  fetch(`${FILE_SERVICE_URL}/retrieve-files`, {
+    mode: 'no-cors',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
     .then(response => response.json())
     .then(files => {
       renderModalFiles(files);
